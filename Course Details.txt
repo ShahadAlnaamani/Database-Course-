@@ -1,0 +1,1 @@
+This course is split up into multiple days each day will be in a separate file 

@@ -14,7 +14,7 @@ Select Pname, Plocation, Dnum
 From Project
 
 --Display each employees commission 
-Select (Fname + ' ' + Lname )  as [Full Name], (10*Salary/100) as [Annual Comm]
+Select (Fname + ' ' + Lname )  as [Full Name], (10*(Salary*12)/100) as [Annual Comm]
 From Employee
 
 

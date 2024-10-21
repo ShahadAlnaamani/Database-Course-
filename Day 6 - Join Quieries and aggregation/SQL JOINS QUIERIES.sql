@@ -46,7 +46,7 @@ Where E.Dno = 10 and W.Hours >= 10 and P.Pname = 'Al Rabwah'
 Select E.Fname + ' ' + E.Lname AS 'Employee Name'
 From Employee E inner join Employee M
 on E.Superssn = M.SSN
-Where E.Superssn = M.SSN and M.Fname = 'Kamel' and M.Lname = 'Mohamed'
+Where M.Fname = 'Kamel' and M.Lname = 'Mohamed'
 
 
 --	Retrieve the names of all employees and the names of the projects they are working on, sorted by the project name
@@ -60,7 +60,7 @@ order by P.Pname
 Select P.Pnumber, D.Dname, E.Lname, E.Address, E.Bdate
 From Project P inner join Departments D on P.Dnum = D.Dnum
 inner join Employee E on D.MGRSSN = E.SSN
-inner join Works_for W on P.Pnumber = W.Pno
+--inner join Works_for W on P.Pnumber = W.Pno
 Where City = 'Cairo'
 
 

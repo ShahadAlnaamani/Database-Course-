@@ -177,27 +177,21 @@ deallocate c1
 
 
 --8--
-declare c1 cursor
-for select distinct Fname
-    from Employee 
-    where Fname is not null
-for read only
-declare @Table table 
-(Firstname varchar(20),
-Lastname Varchar(20)
-)
-open c1
-fetch c1 into @Table 
-while @@FETCH_STATUS=0
+Declare C1 Cursor
+for select DName, Fname
+    from Departments join Employee 
+	on MGRSSN = SSN
+for read only -- to display or    --update --> this show behavior of cursor
+declare @D varchar(20),@E varchar(20)
+open C1
+Fetch C1 into @D,@E
+while @@FETCH_STATUS=0  -->loop
     begin
-        set @Table.Firstname = Fname
-		set @Table.Lastname = Lname 
-        fetch c1 into @Table   --Next Row 
+        select @D,@E
+        Fetch C1 into @D,@E --> counter ++
     end
-select * from @Table 
-close c1
-deallocate C1
-
+close C1
+Deallocate C1
 
 --9--
 declare c2 cursor

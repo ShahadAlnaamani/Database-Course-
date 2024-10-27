@@ -1,0 +1,142 @@
+Part 2 Research
+
+1. Trigger vs stored procedure 
+Triggers:
+- Initiated when specific event occurs (cannot be directly called) automated action
+- Cannot contain transaction statements 
+- Maintain the integrity of data and can be used to create logs
+- Cannot take parameters 
+- Cannot return a value  
+
+Stored procedures: 
+- A set of actions that are directly called by the user and prevents code repetition
+- Can contain transaction statements
+- Can return nothing or return values 
+- can take parameters 
+
+
+2. Stored procedure vs functions 
+Stored procedure:
+- Good for complex tasks including a lot of logic 
+- Can take in parameters 
+- Can return nothing, value, table or multiple results 
+- Can modify data 
+- Can support control flow 
+- Can call functions 
+- Can contain try/catch
+- Can contain transactions 
+
+Function:
+- Can take parameters 
+- Must return something (value / table)
+- Cannot modify data 
+- Can preform calculations 
+-Cannot support control flow 
+
+
+3. Drop vs Delete 
+Drop:
+- DDL
+- Affects the structure of the database 
+- Used on database objects 
+- Cannot be reversed 
+- Frees up space in memory
+
+Delete:
+- DML 
+- Affects the data in the tables 
+- Used on actual data 
+- Can have clause
+- Can be rolled back because it uses buffer
+- Does not affect space on memory
+
+4. Select vs Select into 
+Select: 
+- Outputs results 
+
+Select into: 
+- Copies data from one table into another table 
+
+5. DDl vs DML vs DCL vs DQL 
+DDL:
+- Data definition language 
+- Adds, alters and removes objects 
+- Commands: Drop, Create, Alter, Truncate, Rename  
+
+DML:
+- Data Modification Language 
+- Relates to the actual data on the database
+- Commands: Insert, Update, Delete
+
+DCL:
+- Data control language 
+- Controls access 
+- Commands:  Grant, Revoke 
+
+TCL:
+- TCL (transaction control language)
+- create a group of events that have to happen together 
+- Commands: Commit, Rollback, set transaction, set constraint 
+
+DQL:
+- Data Query Language 
+Commands: Select 
+
+
+6. Table valued vs multi statement function 
+Table valued:
+- it is a user defined function that returns a table  
+- Does not have a begin and end block
+
+Multistatement function:
+- TVF is a user defined function that returns a table of rows and columns
+- It also requires the creation of the column names
+- has a begin and end block
+
+7. Varchar(50) vs varchar(max)
+Varchar(50):
+- 50 bytes 
+- Cannot support Unicode 
+
+Varchar(max):
+- Slower to generate 
+- Cannot be indexed 
+- Can store up to 2GB of data  
+- Supports Unicode 
+- treated kind of like a table when being created 
+
+8. SQL authentication vs Windows authentication 
+SQL:
+- solely relies on the username and password directly going to the sql server (additional methods must be implemented to properly secure the database such as SSL encryption)
+
+Windows:
+- Uses the devices credentials (certificates) to allow access to the sql server acts like a gateway. 
+- Uses Active directory to add security management and centralizes user access management 
+- Allows single sign on making -> easier to integrate 
+
+
+9. Inline function vs view 
+Inline: 
+- User defined function 
+- Function is to prevent repeated code 
+- Cannot declare if / while/ try
+- Returns a table 
+
+View:
+-User defined stored procedure 
+- Used to restrict access to the database (Obfuscation)
+- Collection of actions that will be done when the view is called
+
+
+10. Identity and unique constraint  
+Identity:
+- Added to table column attributes 
+- automatically incremented number 
+- can be used as the PK 
+- Cannot be repeated 
+
+Unique: 
+- Added to table column attributes 
+- Cannot be repeated 
+- Does not need to be an number 
+- Can be the PK 

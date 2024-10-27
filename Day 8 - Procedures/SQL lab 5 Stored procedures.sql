@@ -46,6 +46,8 @@ EXEC EmployeeExit 112233, 321654
 
 
 --4--
+use Company_SD
+
 Alter table Project 
 Add Budget int ;
 
@@ -55,26 +57,31 @@ set Budget = PNumber+20*7
 create table Audit 
 (
 	ProjectNo int,
-	UserName nvarchar(20),
-	ModificationDate Date,
+	UserName varchar(20),
+	ModificationDate DateTime,
 	BudgetOld float,
 	BudgetNew float,
 	foreign key (ProjectNo) References Project (Pnumber),
-	primary key (ProjectNo, UserName)
-)
+	primary key (ProjectNo, UserName, ModificationDate)
+) 
 
 
-insert into Audit (ProjectNo, UserName, ModificationDate,BudgetOld, BudgetNew)
-values(100, 'Dbo', '2008-01-31', 95000, 200000)
-
----
-Create Trigger TBudget
+Create trigger TBudget
 on Project
-after update Budget
-as 
+after update 
+as
+
+begin 
+if update (Budget)
+begin
+
 insert into Audit (ProjectNo, UserName, ModificationDate,BudgetOld, BudgetNew)
-values(inserted.Pnumber, 'Dbo', '2008-01-31', 95000, 200000)
---
+Select i.PNumber, system_user(), GETDATE(), d.Budget, i.Budget
+from inserted i join deleted d on i.PNumber = d.PNumber
+
+end 
+end 
+
 
 --5--
 use ITI
@@ -105,6 +112,29 @@ create table StudentAudit
 (
 	ServerUserName Varchar(20) primary key,
 	ActionDate Date,
-	Note varchar(100)
+	Note Varchar(20)
 )
 
+Create trigger TStudentAudit
+on Student 
+after insert 
+as
+	Select * from inserted 
+	Select * from deleted
+
+begin
+insert into StudentAudit ( suser_name() , getdate() ,  ( suser_name() + 'insert New Row with Key = ' + @@ROWCOUNT + ' in the table Student Table'))
+end 
+
+--8--
+Use ITI
+
+Create trigger TStudentDelete
+on Student 
+instead of delete 
+as
+
+SELECT @@SERVERNAME AS 'ServerName'; 
+
+insert into StudentAudit( ServerName , getdate(), ( 'try to delete Row with Key' + @@KeyValue)
+ 

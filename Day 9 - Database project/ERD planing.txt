@@ -1,5 +1,5 @@
 Entities:
-- Hotel (H_ID[PK], Hotel_Name, Hotel_Loc, Hotel_Contact, Hotel_Rating)
+- Hotel (HID[PK], Hotel_Name, Hotel_Loc, Hotel_Contact, Hotel_Rating)
 - Room (Room_Num[PK], Room_Type, PricePNight, Room_Availablity, Room_Status)
 - Guest (GID(PK), Guest_Name, Guest_Contact, Guest_Proof)
 - Booking (BID[PK], Booking_Date, Checkin_Date, Checkout_Date, Booking_Status, Booking_Total)

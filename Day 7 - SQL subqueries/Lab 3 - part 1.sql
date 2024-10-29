@@ -26,6 +26,13 @@ Select Pname, Sum(Hours)/4
 From Project join Works_for on Pnumber = Pno
 Group by Pname
 
+
+--Display the data of the department which has the smallest employee ID over all employees' ID.
+Select *
+From Departments
+Where Dnum = ( Select Dno From Employee Where SSn = (Select Min(SSN) From Employee))
+
+
 -- For each department, retrieve the department name and the max, min and average salary of its employees
 Select Dno as Department, Min(Salary) As 'Lowest Salary' , Max(Salary) as 'Highest Salary', Avg(Salary) 'Agerage Salary'
 From Employee
@@ -97,3 +104,4 @@ Where Exists (
 	Select * from Works_for Where Exists
 		(Select * from Project where Pname = 'Al Rabwah')
 		)
+

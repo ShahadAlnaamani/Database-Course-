@@ -16,7 +16,7 @@ CREATE TABLE Hotel
 CREATE TABLE Staff_Member
 (
 	SID int Primary Key Identity(1,1),
-	Staff_Contact int,
+	Staff_Contact  varchar(20),
 	FirstName varchar(10),
 	LastName varchar(10),
 	Staff_Position varchar(20),
@@ -51,7 +51,7 @@ CREATE TABLE Guest
 CREATE TABLE Hotel_Contact
 (
 	Hotel_ID int, 
-	PhoneNo int  Not Null,
+	PhoneNo varchar(20) Not Null,
 	Foreign Key (Hotel_ID) references Hotel(HID) ON DELETE CASCADE  ON UPDATE CASCADE
 )
 
@@ -59,7 +59,7 @@ CREATE TABLE Hotel_Contact
 CREATE TABLE Review 
 (
 	RID int Primary Key Identity(1,1),
-	Rev_Comment varchar(20) Default('No comments'),
+	Rev_Comment varchar(50) Default('No comments'),
 	Rev_Rating int CONSTRAINT CK_Rev check(Rev_Rating between 1 and 6),
 	Rev_Date Date  Not Null,
 	HotelID int, 
@@ -90,7 +90,7 @@ CREATE TABLE Payment
 	Payment_Date Date  Not Null, 
 	Payment_Amount float  Not Null, 
 	Book_ID int ,
-	Payment_Method varchar CONSTRAINT CK_Method check(Payment_Method  = 'Debit' or Payment_Method  ='Credit' or Payment_Method  ='Cash'),
+	Payment_Method varchar(20) CONSTRAINT CK_Method check(Payment_Method in ( 'Debit', 'Credit', 'Cash')),
 	Foreign Key (Book_ID) references Booking(BID) ON DELETE CASCADE  ON UPDATE CASCADE,
 )
 

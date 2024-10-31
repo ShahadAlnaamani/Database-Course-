@@ -143,7 +143,7 @@ AS
 Select *
 From Room Join Hotel on H_ID = HID
 Where Room_Avail = 1 --take 1 to be available  
-Order by Price_P_Night, Room_Type offset 0 rows
+Order by  Room_Type, Price_P_Night offset 0 rows
 
 
 select * from ViewAvailableRooms
